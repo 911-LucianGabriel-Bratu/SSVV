@@ -35,8 +35,43 @@ public class AppTest {
     }
 
     @Test
-    void addStudentFailure() {
+    void addStudentIdEmptyFailure() {
         this.student = new Student("", "nfaib", 100, "ewofohewf");
+        this.service.addStudent(this.student);
+    }
+
+    @Test
+    void addStudentIdNullFailure() {
+        this.student = new Student(null, "nfaib", 100, "ewofohewf");
+        this.service.addStudent(this.student);
+    }
+
+    @Test
+    void addStudentNumeEmptyFailure() {
+        this.student = new Student("300", "", 100, "ewofohewf");
+        this.service.addStudent(this.student);
+    }
+
+    @Test
+    void addStudentNumeNullFailure() {
+        this.student = new Student("300", null, 100, "ewofohewf");
+        this.service.addStudent(this.student);
+    }
+
+    @Test
+    void addStudentGrupaLessThan0Failure() {
+        this.student = new Student("300", "nfaib", -1, "ewofohewf");
+        this.service.addStudent(this.student);
+    }
+    @Test
+    void addStudentEmailEmptyFailure() {
+        this.student = new Student("300", "nfaib", 100, "");
+        this.service.addStudent(this.student);
+    }
+
+    @Test
+    void addStudentEmailNullFailure() {
+        this.student = new Student("300", "nfaib", 100, null);
         this.service.addStudent(this.student);
     }
 }
