@@ -31,47 +31,78 @@ public class AppTest {
     @Test
     void addStudentSuccessful() {
         this.student = new Student("300", "nfaib", 100, "ewofohewf");
-        this.service.addStudent(this.student);
+        assert this.service.addStudent(this.student) == null;
     }
 
     @Test
     void addStudentIdEmptyFailure() {
         this.student = new Student("", "nfaib", 100, "ewofohewf");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {
+
+        }
     }
 
     @Test
     void addStudentIdNullFailure() {
         this.student = new Student(null, "nfaib", 100, "ewofohewf");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
 
     @Test
     void addStudentNumeEmptyFailure() {
         this.student = new Student("300", "", 100, "ewofohewf");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
 
     @Test
     void addStudentNumeNullFailure() {
         this.student = new Student("300", null, 100, "ewofohewf");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
 
     @Test
     void addStudentGrupaLessThan0Failure() {
         this.student = new Student("300", "nfaib", -1, "ewofohewf");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
+
     @Test
     void addStudentEmailEmptyFailure() {
         this.student = new Student("300", "nfaib", 100, "");
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
 
     @Test
     void addStudentEmailNullFailure() {
         this.student = new Student("300", "nfaib", 100, null);
-        this.service.addStudent(this.student);
+        try {
+            this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
     }
 }
