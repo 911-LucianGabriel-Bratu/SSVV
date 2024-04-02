@@ -31,6 +31,7 @@ public class AppTest {
     @Test
     void addStudentSuccessful() {
         this.student = new Student("300", "nfaib", 100, "ewofohewf");
+        this.service.deleteStudent(this.student.getID());
         assert this.service.addStudent(this.student) == null;
     }
 
