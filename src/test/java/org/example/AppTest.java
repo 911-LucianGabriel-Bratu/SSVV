@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.domain.Student;
+import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepo;
 import org.example.repository.StudentXMLRepo;
 import org.example.repository.TemaXMLRepo;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class AppTest {
     Service service;
+    Tema tema;
     Student student;
     @BeforeEach
     void setUp() {
@@ -102,6 +104,24 @@ public class AppTest {
         this.student = new Student("300", "nfaib", 100, null);
         try {
             this.service.addStudent(this.student);
+            assert false;
+        }
+        catch (Exception e) {}
+    }
+    @Test
+    void addAssignmentSuccessful() {
+        this.tema = new Tema("1", "work work work", 10, 10);
+        try {
+            this.service.addTema(this.tema);
+            assert true;
+        }
+        catch (Exception e) {}
+    }
+    @Test
+    void addAssignmentDescriptionEmptyFailure() {
+        this.tema = new Tema("1", "", 10, 10);
+        try {
+            this.service.addTema(this.tema);
             assert false;
         }
         catch (Exception e) {}
