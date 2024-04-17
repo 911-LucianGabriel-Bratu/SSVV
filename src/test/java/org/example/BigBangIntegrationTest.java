@@ -10,10 +10,13 @@ import org.example.service.Service;
 import org.example.validation.NotaValidator;
 import org.example.validation.StudentValidator;
 import org.example.validation.TemaValidator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+
+import static org.junit.Assert.*;
 
 public class BigBangIntegrationTest {
     static Service service;
@@ -64,8 +67,33 @@ public class BigBangIntegrationTest {
 
     @Test
     public void integrationTest() {
-        addAssignmentSuccessful();
-        addStudentSuccessful();
-        addNotaSuccessful();
+        this.student = new Student("300", "nfaib", 100, "ewofohewf");
+        Assertions.assertNotNull(service.addStudent(this.student));
+
+        service.deleteTema("101");
+        this.tema = new Tema("101", "work work work", 1, 4);
+        try {
+            service.addTema(this.tema);
+            Assertions.assertEquals(this.tema.getID(), service.findTema("101").getID());
+            Assertions.assertEquals(this.tema.getDescriere(), service.findTema("101").getDescriere());
+            Assertions.assertEquals(this.tema.getDeadline(), service.findTema("101").getDeadline());
+            Assertions.assertEquals(this.tema.getPrimire(), service.findTema("101").getPrimire());
+        } catch (Exception e) {
+            Assertions.fail("Adding assignment failed");
+        }
+
+        service.deleteNota("101");
+        LocalDate date = LocalDate.of(2018, 10, 10);
+        this.nota = new Nota("101", "300", "101", 10.0, date);
+        try {
+            service.addNota(this.nota, "feedback");
+            Assertions.assertEquals(this.nota.getID(), service.findNota("101").getID());
+            Assertions.assertEquals(this.nota.getIdStudent(), service.findNota("101").getIdStudent());
+            Assertions.assertEquals(this.nota.getIdTema(), service.findNota("101").getIdTema());
+            Assertions.assertEquals(this.nota.getNota(), service.findNota("101").getNota());
+            Assertions.assertEquals(this.nota.getData(), service.findNota("101").getData());
+        } catch (Exception e) {
+            Assertions.fail("Adding grade failed");
+        }
     }
 }
